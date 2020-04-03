@@ -10,11 +10,11 @@ namespace HarFileReader
 	{
 		static void Main(string[] args)
 		{
+			Console.WriteLine("fileName\t" + Printer.Print(Entry.Headers.ToArray()));
 			foreach (var arg in args)
 			{
 				var baseFileName = Path.GetFileName(arg);
 				var allFiles = Directory.GetFiles(Path.GetDirectoryName(arg), baseFileName);
-				Console.WriteLine("fileName\t" + Printer.Print(Entry.Headers.ToArray()));
 				foreach (var file in allFiles)
 				{
 					var fileName = Path.GetFileName(file);
