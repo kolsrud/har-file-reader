@@ -14,7 +14,9 @@ namespace HarFileReader
 			foreach (var arg in args)
 			{
 				var baseFileName = Path.GetFileName(arg);
-				var allFiles = Directory.GetFiles(Path.GetDirectoryName(arg), baseFileName);
+				var dirName = Path.GetDirectoryName(arg);
+				dirName = string.IsNullOrWhiteSpace(dirName) ? "." : dirName;
+				var allFiles = Directory.GetFiles(dirName, baseFileName);
 				foreach (var file in allFiles)
 				{
 					var fileName = Path.GetFileName(file);
