@@ -34,19 +34,20 @@ namespace HarFileReader
 
 	internal class Entry : Printer
 	{
-		public string startedDateTime;
+		public DateTime startedDateTime;
 		public double time;
 		public Request request;
 		public Response response;
 		public Timings timings;
+		public string _fromCache;
 
 
 		public override string ToString()
 		{
-			return Print(startedDateTime, time, request, response, timings);
+			return Print(startedDateTime.ToString("O"), time, request, response, timings, _fromCache ?? "No");
 		}
 
-		public static IEnumerable<string> Headers => new[] {nameof(startedDateTime), nameof(time)}.Concat(Request.Headers).Concat(Response.Headers).Concat(Timings.Headers);
+		public static IEnumerable<string> Headers => new[] {nameof(startedDateTime), nameof(time)}.Concat(Request.Headers).Concat(Response.Headers).Concat(Timings.Headers).Append(nameof(_fromCache));
 	}
 
 	internal abstract class Printer
