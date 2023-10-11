@@ -40,14 +40,14 @@ namespace HarFileReader
 		public Response response;
 		public Timings timings;
 		public string _fromCache;
+        public string _resourceType;
 
-
-		public override string ToString()
+        public override string ToString()
 		{
-			return Print(startedDateTime.ToString("O"), time, request, response, timings, _fromCache ?? "No");
+			return Print(startedDateTime.ToString("O"), time, request, response, timings, _fromCache ?? "No", _resourceType);
 		}
 
-		public static IEnumerable<string> Headers => new[] {nameof(startedDateTime), nameof(time)}.Concat(Request.Headers).Concat(Response.Headers).Concat(Timings.Headers).Append(nameof(_fromCache));
+		public static IEnumerable<string> Headers => new[] {nameof(startedDateTime), nameof(time)}.Concat(Request.Headers).Concat(Response.Headers).Concat(Timings.Headers).Append(nameof(_fromCache)).Append(nameof(_resourceType));
 	}
 
 	internal abstract class Printer
