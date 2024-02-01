@@ -10,7 +10,8 @@ namespace HarFileReader
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("fileName\t" + Printer.Print(Entry.Headers.ToArray()));
+			Console.WriteLine(string.Join('\t', "harFileId", "dirName", "fileName", Printer.Print(Entry.Headers.ToArray())));
+			int harFileId = 0;
 			foreach (var arg in args)
 			{
 				var baseFileName = Path.GetFileName(arg);
@@ -25,8 +26,10 @@ namespace HarFileReader
 					var entries = fullFile["log"]["entries"].ToObject<List<Entry>>();
 					foreach (var entry in entries)
 					{
-						Console.WriteLine(Printer.Print(fileName, entry));
+						Console.WriteLine(Printer.Print(harFileId, dirName, fileName, entry));
 					}
+
+					harFileId++;
 				}
 			}
 		}
